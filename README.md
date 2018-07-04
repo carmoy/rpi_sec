@@ -22,10 +22,23 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
 # Software
 
 ## Tensorflow
-[Pete Warden's post](https://petewarden.com/2017/08/)
+
+I installed Tensorflow by following [Pete Warden's post](https://petewarden.com/2017/08/). The most receint tensorflow version was picked (as of 07/2018).
 ```
 sudo apt-get install libblas-dev liblapack-dev python-dev \
 libatlas-base-dev gfortran python-setuptools
 sudo pip2 install \
 http://ci.tensorflow.org/view/Nightly/job/nightly-pi/304/artifact/output-artifacts/tensorflow-1.9.0rc0-cp27-none-linux_armv7l.whl
+```
+
+Then I installed Tensorflow Object Detection Api. My installation is adapted from their [installation instruction](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md).
+
+First install dependencies. Note that `--no-cache-dir` is used to avoid memory error when installing matplotlib.
+
+```
+sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
+pip install --user Cython
+pip install --user contextlib2
+pip install --user jupyter
+pip install --no-cache-dir --user matplotlib
 ```
