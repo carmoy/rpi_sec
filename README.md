@@ -43,3 +43,13 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
      pip install --user jupyter
      pip install --no-cache-dir --user matplotlib
      ```
+     
+ * Then install Thensorflow Object Detection Api.
+ 
+ ```
+ $ mkdir tensorflow && cd tensorflow/
+ tensorflow$ git clone https://github.com/tensorflow/models.git
+ tensorflow$ cd models/research/
+ tensorflow/models/research$ protoc object_detection/protos/*.proto --python_out=.
+ # ls object_detection/protos/ show that python files are compiled from proto files.
+ ```
