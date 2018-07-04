@@ -46,10 +46,29 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
      
  * Then install Thensorflow Object Detection Api.
  
- ```
- $ mkdir tensorflow && cd tensorflow/
- tensorflow$ git clone https://github.com/tensorflow/models.git
- tensorflow$ cd models/research/
- tensorflow/models/research$ protoc object_detection/protos/*.proto --python_out=.
- # ls object_detection/protos/ show that python files are compiled from proto files.
- ```
+   ```
+   $ mkdir tensorflow && cd tensorflow/
+   tensorflow$ git clone https://github.com/tensorflow/models.git
+   tensorflow$ cd models/research/
+   tensorflow/models/research$ protoc object_detection/protos/*.proto --python_out=.
+   # ls object_detection/protos/ show that python files are compiled from proto files.
+   ```
+ 
+   Then add the path to `PYTHONPATH`. In `~/.bashrc`, append the following line:
+ 
+   ```
+   export PYTHONPATH=$PYTHONPATH:<absolute path of tensorflow/models/research/>:\
+                     <absolute path of tensorflow/models/research/>/slim
+   ```
+ * Finally, test the installation:
+ 
+   ```
+   $ python tensorflow/models/research/object_detection/builders/model_builder_test.py
+   ...............
+   ----------------------------------------------------------------------
+   Ran 15 tests in 0.772s
+
+   OK
+
+   ```
+ 
