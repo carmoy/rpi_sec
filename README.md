@@ -16,9 +16,16 @@ I installed the board in the case, and connected it with a mouse, a keyboard, an
 
 I powered it on, and installed the OS that is preloaded in the micro SD card that comes with the starter kit.
 
-![Raspberry Pi board in case](figs/pi_box.jpg)
 
+<img src="figs/pi_box.jpg" alt="Pi box in case" width="250px"/>
+
+# Software
+
+## Tensorflow
+[Pete Warden's post](https://petewarden.com/2017/08/)
+```
 sudo apt-get install libblas-dev liblapack-dev python-dev \
 libatlas-base-dev gfortran python-setuptools
-sudo ​pip2 install \
+sudo pip2 install \
 http://ci.tensorflow.org/view/Nightly/job/nightly-pi/304/artifact/output-artifacts/tensorflow-1.9.0rc0-cp27-none-linux_armv7l.whl
+```
