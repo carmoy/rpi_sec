@@ -8,7 +8,7 @@ I bought a CanaKit Raspberry Pi 3 B+ (B Plus) Complete Starter Kit (16 GB Editio
 ---|---
 CPU           | quad-core, 1.4GHz 
 RAM           | 1GB               
-Sotrage       | 16G Micro-SD  
+Storage       | 16G Micro-SD  
 
 I installed the board in the case, and connected it with a mouse, a keyboard, and a monitor.
 
