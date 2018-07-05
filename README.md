@@ -72,3 +72,4 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
 
    ```
  
+   One can also run [object_detection_tutorial](object_detection_tutorial.ipynb) to learn how to use the object detection api.
