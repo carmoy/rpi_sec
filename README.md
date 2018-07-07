@@ -46,7 +46,14 @@ fswebcam image.jpg
 
 My Raspberry Pi ran into a problem: when I tried to take a second picture after a couple of minutes since I took the first picture, `fswebcam` failed to open the webcam device and says the device is busy. See [here](https://raspberrypi.stackexchange.com/questions/76971/fswebcam-every-other-attempt-results-in-device-busy) for more discussion.
 
- I found the solution [here](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=197089) works for me: it was fixed by appending `dwc_otg.fiq_fsm_mask=0x3` to `/boot/cmdline.txt`, and reboot Raspberry Pi.
+ I found the solution [here](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=197089) works for me: it was fixed by appending `dwc_otg.fiq_fsm_mask=0x3` to `/boot/cmdline.txt`, and then rebooting Raspberry Pi.
+
+## Costs
+
+|Item|Cost|From|
+---|---|---
+Raspberry Starter Kit |$69.99      | [Amazon](https://www.amazon.com/gp/product/B07BLRSKBV/) 
+Logitech C270 Webcam  |$19.99      | Fry's                
 
 # Software
 
