@@ -19,6 +19,35 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
 
 <img src="figs/pi_box.jpg" alt="Pi box in case" width="250px"/>
 
+## USB Webcam
+
+I bought a [Logitech C270 webcam](https://www.amazon.com/dp/B004FHO5Y6). The Raspberry Pi board has four USB ports, and I connected the webcam to one of them.
+
+```
+$ lsusb
+...
+Bus 001 Device 005: ID 046d:0825 Logitech, Inc. Webcam C270
+...
+```
+
+`fswebcam` package can be used to manage the webcam. To install it, run:
+
+```
+sudo apt-get install fswebcam
+```
+
+The following command will use the webcam to take a picture and save it as the specified file name. See `man fsweb` for more options.
+
+```
+fswebcam image.jpg
+```
+
+### Failure in the 2nd attempt to access the webcam
+
+My Raspberry Pi ran into a problem: when I tried to take a second picture after a couple of minutes since I took the first picture, `fswebcam` failed to open the webcam device and says the device is busy. See [here](https://raspberrypi.stackexchange.com/questions/76971/fswebcam-every-other-attempt-results-in-device-busy) for more discussion.
+
+ I found the solution [here](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=197089) works for me: it was fixed by appending `dwc_otg.fiq_fsm_mask=0x3` to `/boot/cmdline.txt`, and reboot Raspberry Pi.
+
 # Software
 
 ## Tensorflow
