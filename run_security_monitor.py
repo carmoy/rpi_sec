@@ -17,9 +17,10 @@ def main():
   
   #capturer = usb_capturer.UsbCapturer()
   #capturer.capture('test.image')
-  logging.error('test error')
+  # logging.error('test error')
   # logger.warning('test warning')
   detector = object_detector.ObjectDetector()
+  print detector.run_inference_for_single_image('test_data/test.jpg')
 
 if __name__ == "__main__":
   main()
