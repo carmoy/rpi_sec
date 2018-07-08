@@ -1,0 +1,10 @@
+digraph System {
+  rankdir=LR
+  Capturer [shape=box];
+  ObjectDetector [shape=box, label="Object Detector"];
+  Reporter [shape=box];
+  sink [shape=none, label=""]
+  Capturer -> ObjectDetector [style=bold, label="captured image"]
+  ObjectDetector -> Reporter [style=bold, label="detection result"]
+  Reporter -> sink [style=bold, label="actions"]
+}
