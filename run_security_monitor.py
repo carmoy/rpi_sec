@@ -3,10 +3,13 @@
 import logging
 import usb_capturer
 import object_detector
+import simple_reporter
 
 LOGGING_FORMAT = '%(asctime)s,%(msecs)d %(levelname)-5s ' \
 '[%(filename)s:%(lineno)d] %(message)s'
 DATE_FORMAT = '%d-%m-%Y:%H:%M:%S'
+
+DEFAULT_CAPTURED_IMAGE_PATH = 'test_data/captured_image.jpg'
 
 def main():
   # Configures logging string format. Example:
@@ -15,12 +18,15 @@ def main():
   logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
   level=logging.DEBUG)
   
-  #capturer = usb_capturer.UsbCapturer()
-  #capturer.capture('test.image')
-  # logging.error('test error')
-  # logger.warning('test warning')
+  # initialization
+  capturer = usb_capturer.UsbCapturer()
   detector = object_detector.ObjectDetector()
-  print detector.run_inference_for_single_image('test_data/test.jpg')
+  reporter = simple_reporter.SimpleReporter()
+
+  while True:
+    capturer.capture(DEFAULT_CAPTURED_IMAGE_PATH)
+    res, image_np = detector.run_inference_for_single_image(DEFAULT_CAPTURED_IMAGE_PATH)
+    reporter.update_detection_result(res, image_np)
 
 if __name__ == "__main__":
   main()

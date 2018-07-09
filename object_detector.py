@@ -31,7 +31,8 @@ class ObjectDetector:
     Args:
       image_path
     Returns:
-      a dictionary of detection result.
+      a dictionary of detection result, and a numpy array representing
+      the image
     '''
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
@@ -41,7 +42,7 @@ class ObjectDetector:
     # image_np_expanded = np.expand_dims(image_np, axis=0)
     
     # Actual detection.
-    return self._run_inference_for_single_image(image_np)
+    return self._run_inference_for_single_image(image_np), image_np
   
   def _run_inference_for_single_image(self, image):
     '''
@@ -61,6 +62,7 @@ class ObjectDetector:
         ops = tf.get_default_graph().get_operations()
         all_tensor_names = {output.name for op in ops for output in op.outputs}
         tensor_dict = {}
+        #TODO: define these keys as constants
         for key in [
             'num_detections', 'detection_boxes', 'detection_scores',
             'detection_classes', 'detection_masks'
