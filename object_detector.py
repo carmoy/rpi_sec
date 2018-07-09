@@ -50,10 +50,10 @@ class ObjectDetector:
       only accept image with three channels (i.e., image of size 
       [None, None, 3])
     Returns:
-      a dictionary of detection result.
-      In the output, a bounding box is described by normalized 
-      [ymin, xmin, ymax, xmax]. (i.e. each number is between 0-1). The
-      actual coordinates is [ymin*height, xmin*width, ymax*height, xmax*width].
+      a dictionary of detection result: a list of detected object ids, their
+      confidence scores, and their bounding boxes. A bounding box is described 
+      by normalized [ymin, xmin, ymax, xmax]. (i.e. each number is between 0-1). 
+      The actual coordinates is [ymin*height, xmin*width, ymax*height, xmax*width].
     '''
     with self._detection_graph.as_default():
       with tf.Session() as sess:
