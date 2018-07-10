@@ -9,6 +9,10 @@ DEFAULT_LABEL_PATH = 'test_data/data/mscoco_label_map.pbtxt'
 DEFAULT_NUM_CLASSES = 90
 DEFAULT_DETECTION_RESULTS_DIR = 'detection_results'
 
+# helper function to log detection result
+def log_detection_result(result):
+  logging.info('%d object(s) are detected.', result['num_detections'])
+
 class SimpleReporter:
   def __init__(self):
     self._detection_results_dir = DEFAULT_DETECTION_RESULTS_DIR
@@ -26,6 +30,7 @@ class SimpleReporter:
     '''If changes are found in the given detection result. Updates the
     last detection result with the given one and visualize it.
     '''
+    log_detection_result(detection_result)
     if self._detection_result_changed(detection_result):
       self._last_detection_result = detection_result
       logging.info('last detection result is updated.')
