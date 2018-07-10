@@ -36,9 +36,13 @@ def main():
   reporter = simple_reporter.SimpleReporter()
 
   while True:
-    capturer.capture(DEFAULT_CAPTURED_IMAGE_PATH)
-    res, image_np = detector.run_inference_for_single_image(DEFAULT_CAPTURED_IMAGE_PATH)
-    reporter.update_detection_result(res, image_np)
+    try:
+      capturer.capture(DEFAULT_CAPTURED_IMAGE_PATH)
+      res, image_np = detector.run_inference_for_single_image(DEFAULT_CAPTURED_IMAGE_PATH)
+      reporter.update_detection_result(res, image_np)
+    except:
+      logging.error('Exception happens. Exit the main loop')
+      break
 
 if __name__ == "__main__":
   main()
