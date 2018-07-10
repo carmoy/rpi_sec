@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import argparse
 import logging
 import usb_capturer
 import object_detector
@@ -12,11 +13,22 @@ DATE_FORMAT = '%d-%m-%Y:%H:%M:%S'
 DEFAULT_CAPTURED_IMAGE_PATH = 'test_data/captured_image.jpg'
 
 def main():
+  # command line flags
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--log_to_file", 
+  help="a file name that log messages are saved to", type=str)
+  args = parser.parse_args()
+  
   # Configures logging string format. Example:
   # 07-07-2018:19:27:18,701 ERROR [run_security_monitor.py:13] error_msg
   # Note that tensorflow logging messages have their own format.
-  logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
-  level=logging.DEBUG)
+  if args.log_to_file:
+    logging.basicConfig(filename=args.log_to_file, \
+    format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
+    level=logging.DEBUG)
+  else:
+    logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
+    level=logging.DEBUG)
   
   # initialization
   capturer = usb_capturer.UsbCapturer()
