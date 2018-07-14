@@ -48,12 +48,31 @@ My Raspberry Pi ran into a problem: when I tried to take a second picture after 
 
  I found the solution [here](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=197089) works for me: it was fixed by appending `dwc_otg.fiq_fsm_mask=0x3` to `/boot/cmdline.txt`, and then rebooting Raspberry Pi.
 
+## Pi Camera
+
+I bought a [Raspberry Pi Camera Module 5MP 1080p](https://www.amazon.com/gp/product/B06XKLLT6G/). Installation is easy. One also needs to enable camera in Raspberry Pi Configuration. The following code can be used to test the camera when Raspberry Pi is connected to a monitor.
+
+```
+from picamera import PiCamera
+from time import sleep
+
+camera = PiCamera()
+
+camera.start_preview()
+sleep(5)
+camera.capture('image.jpg')
+camera.stop_preview()
+```
+
+You can see the preview in the screen, and finally an image is taken and saved to the local directory.
+
 ## Costs
 
 |Item|Cost|From|
 ---|---|---
 Raspberry Starter Kit |$69.99      | [Amazon](https://www.amazon.com/gp/product/B07BLRSKBV/) 
-Logitech C270 Webcam  |$19.99      | Fry's                
+Logitech C270 Webcam  |$19.99      | Fry's    
+Pi Camera 5MP 1080p   |$15.99      | [Amazon](https://www.amazon.com/gp/product/B06XKLLT6G/)     
 
 # Software
 
