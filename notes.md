@@ -15,5 +15,12 @@
   * performance data
   * events detected (image, and object detection results) 
   
+* screen usage
+  * screen -r [session name]: join an existing session. session name can be omitted if there is only one session
+  * screen : create a new session
+  * screen -ls
+  * detach: in the session, ctrl+A,d
+  * terminate: in the session, ctrl+d
+  
 
 
