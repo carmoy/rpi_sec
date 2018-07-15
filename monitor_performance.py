@@ -3,6 +3,7 @@ from utils import monitor_memory
 import csv
 import datetime
 import logging
+import sys
 import time
 
 FILE_NAME_TEMPLATE = 'test_data/perf-{suffix}.csv'
