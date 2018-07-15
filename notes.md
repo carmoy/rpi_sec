@@ -3,6 +3,7 @@
 
 * evaluating off-the-shelf models
   * YOLO
+  * how to remove screen grids in the image (GAN?)
 
 * motion package. some useful links:
   * https://motion-project.github.io/motion_config.html#locate_motion_mode
