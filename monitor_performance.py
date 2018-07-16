@@ -6,8 +6,8 @@ import logging
 import sys
 import time
 
-FILE_NAME_TEMPLATE = 'test_data/perf-{suffix}.csv'
-DATETIME_FORMAT='%Y-%m-%d-%H-%M-%S'
+PERF_FILE_NAME_TEMPLATE = 'test_data/perf-{suffix}.csv'
+PERF_DATETIME_FORMAT='%Y-%m-%d-%H-%M-%S'
 
 # column names of the csv file
 TIMESTAMP = 'timestamp'
@@ -16,8 +16,8 @@ MEM_USAGE = 'mem_usage'
 
 if __name__=='__main__':
   # save the performance result to a csv file
-  suffix_str=datetime.datetime.now().strftime(DATETIME_FORMAT)
-  file_name = FILE_NAME_TEMPLATE.format(suffix=suffix_str)
+  suffix_str=datetime.datetime.now().strftime(PERF_DATETIME_FORMAT)
+  file_name = PERF_FILE_NAME_TEMPLATE.format(suffix=suffix_str)
   # check cpu and memory usage and then sleep
   sleep_time = 1
   

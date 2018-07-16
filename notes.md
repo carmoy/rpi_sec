@@ -22,5 +22,7 @@
   * detach: in the session, ctrl+A,d
   * terminate: in the session, ctrl+d
   
+* plt
+  * https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes
 
 
