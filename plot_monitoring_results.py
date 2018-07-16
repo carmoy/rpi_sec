@@ -98,8 +98,9 @@ def plot_measurements(perf_data, events, file_name):
   # legend
   ax.legend()
   
-  # use hours as xticks
-  ts_xlabel = np.arange(ts.min(), ts.max() + 3600, 3600)
+  # use hours as xticks. '- ts.min()%3600' is used to remove the minutes
+  # and seconds part
+  ts_xlabel = np.arange(ts.min() - ts.min()%3600, ts.max() + 3600, 3600)
   # get the hours of these timestamps
   hours_xlabel = [datetime.datetime.fromtimestamp(entry).hour for \
   entry in ts_xlabel]
