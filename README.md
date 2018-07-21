@@ -82,6 +82,22 @@ Pi Camera 5MP 1080p   |$15.99      | [Amazon](https://www.amazon.com/gp/product/
 
 # Software
 
+## Motion
+
+[Motion](https://motion-project.github.io/) is a highly configurable program that monitors video signals from many types of cameras.
+
+To install Motion that supports Raspberry Pi camera, one cannot use `apt-get install` to install motion. Instead, you need to choose the proper deb file from there [release](https://github.com/Motion-Project/motion/releases) page.
+
+See this [blog](https://www.bouvet.no/bouvet-deler/utbrudd/building-a-motion-activated-security-camera-with-the-raspberry-pi-zero) for detailed instruction on how to install, configure, and run Motion on Raspberry Pi.
+
+### Configuration
+The configuration file of Motion is quite complicated. Here are some useful links:
+
+* https://motion-project.github.io/motion_config.html#locate_motion_mode
+* http://www.noah.org/wiki/motion_notes
+* `post_capture, pre_capture` used for movies, the values are in seconds instead of frames...
+  
+
 ## Tensorflow
 
 1. I installed Tensorflow by following [Pete Warden's post](https://petewarden.com/2017/08/). The most receint successful build,    `tensorflow-1.9.0rc0-cp27` was picked (as of 07/2018).
