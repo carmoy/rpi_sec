@@ -113,6 +113,8 @@ Then I got OpenCV2.4.9
 '2.4.9.1'
 ```
 
+OpenCV2.4.9 documentation can be found [here](https://docs.opencv.org/2.4.9/index.html).
+
 ### Note
 I had to uninstall OpenCV3.1 by the deb file since it does not work on Raspbian stretch. To get the package name from a deb file, do
 ```
