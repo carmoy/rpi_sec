@@ -96,7 +96,32 @@ The configuration file of Motion is quite complicated. Here are some useful link
 * https://motion-project.github.io/motion_config.html#locate_motion_mode
 * http://www.noah.org/wiki/motion_notes
 * `post_capture, pre_capture` used for movies, the values are in seconds instead of frames...
-  
+
+## OpenCV
+At first, I try to follow [thses instruction](https://github.com/jabelone/OpenCV-for-Pi) to install OpenCV3.1, but got an [import error](https://github.com/jabelone/OpenCV-for-Pi/issues/10). It turned out that this is raspbian stretch related issue. The pre-compiled OpenCV binary works on `jessie`, but not on `stretch`.
+
+Instead, I installed OpenCV by (dependent libraries have been already installed before)
+```
+$ sudo apt-get install libopencv-dev
+$ sudo apt-get install python-opencv
+```
+
+Then I got OpenCV2.4.9
+```
+>>> import cv2
+>>> cv2.__version__
+'2.4.9.1'
+```
+
+### Note
+I had to uninstall OpenCV3.1 by the deb file since it does not work on Raspbian stretch. To get the package name from a deb file, do
+```
+$ dpkg --info package_file.deb
+```
+Then to uninstall the package, do
+```
+$ sudo apt-get remove package_name
+```
 
 ## Tensorflow
 
