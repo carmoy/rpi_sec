@@ -19,6 +19,9 @@ I powered it on, and installed the OS that is preloaded in the micro SD card tha
 
 <img src="figs/pi_box.jpg" alt="Pi box in case" width="250px"/>
 
+### Issues
+* The power adapter has loose connection to the Pi board. A slight touch on the power cord might cause Raspberry Pi shutdown.
+
 ## USB Webcam
 
 I bought a [Logitech C270 webcam](https://www.amazon.com/dp/B004FHO5Y6). The Raspberry Pi board has four USB ports, and I connected the webcam to one of them.
