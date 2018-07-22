@@ -18,5 +18,7 @@
   
 * plt
   * https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes
-
-
+  
+* opencv
+  * implement a simplified event determination logic: consider a sequencial frames with large enough foreground as one event. then maybe output the image with most foreground size.
+  * consider image segmentation to better compute bounding boxes
