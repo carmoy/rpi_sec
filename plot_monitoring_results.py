@@ -17,6 +17,9 @@ MOTION_DATETIME_FORMAT = '%Y%m%d%H%M%S'
 # <event_id>-<datetime>-<frame_number>.jpg
 MOTION_IMAGE_FILE_PATTERN = r'(^\d+)-(\d+)-\d+\.jpg$'
 
+# <timestamp in ms>.jpg
+OPENCV_IMAGE_FILE_PATTERN = r'(^\d+)\.jpg$'
+
 # key names, other key names are defined in monitor_performance.py
 EVENT = 'event'
 
@@ -41,7 +44,7 @@ def read_perf_data(perf_data_file):
   logging.info('last entry: %s', str(entries[-1]))
   return entries
 
-def get_event_times(captured_images_dir):
+def get_motion_event_times(captured_images_dir):
   '''Reads a directory that stores images captured by motion and gets
   events id and timestamps.
   Returns:
@@ -63,6 +66,33 @@ def get_event_times(captured_images_dir):
       monitor_performance.TIMESTAMP: ts})
   
   logging.info('%d events captured by motion in %s', \
+  len(events), captured_images_dir)
+  logging.info('First stored event: %s', str(events[0]))
+  return events
+  
+def get_opencv_event_times(captured_images_dir):
+  '''Reads a directory that stores images captured by motion and gets
+  events id and timestamps.
+  Returns:
+  A list of dicts each of which has a timestamp and event id.
+  '''
+  all_files = [f for f in os.listdir(captured_images_dir) if \
+  os.path.isfile(os.path.join(captured_images_dir, f))]
+  logging.info('%d files in %s', len(all_files), captured_images_dir)
+  
+  p = re.compile(OPENCV_IMAGE_FILE_PATTERN)
+  events = []
+  event_no = 1;
+  for f in all_files:
+    m = p.match(f)
+    if m:
+      event_id = '_'.join([EVENT, str(event_no)])
+      event_no += 1
+      ts = int(m.group(1))/1000.0
+      events.append({EVENT: event_id, \
+      monitor_performance.TIMESTAMP: ts})
+  
+  logging.info('%d events captured by opencv in %s', \
   len(events), captured_images_dir)
   logging.info('First stored event: %s', str(events[0]))
   return events
@@ -120,9 +150,15 @@ if __name__=='__main__':
   logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
     level=logging.DEBUG)
   
-  perf_data = read_perf_data('test_data/perf-2018-07-15-00-44-19.csv')
-  events = get_event_times('/home/pi/Documents/motion_detections-2018-07-15')
-  file_name = 'figs/perf-2018-07-15.jpg'
+  # load measurements data for motion
+  # perf_data = read_perf_data('test_data/perf-2018-07-15-00-44-19.csv')
+  # events = get_event_times('/home/pi/Documents/motion_detections-2018-07-15')
+  # file_name = 'figs/perf-2018-07-15.jpg'
   
+  # load measurements data for opencv
+  events = get_opencv_event_times('/home/pi/Documents/cv_images')
+  perf_data = read_perf_data('test_data/perf-2018-07-21-22-39-09.csv')
+  perf_data.extend(read_perf_data('test_data/perf-2018-07-22-12-14-06.csv'))
+  file_name = 'figs/opencv-perf-2018-07-22.jpg'
   plot_measurements(perf_data, events, file_name)
   
