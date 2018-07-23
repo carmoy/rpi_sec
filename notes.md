@@ -21,4 +21,5 @@
   
 * opencv
   * implement a simplified event determination logic: consider a sequencial frames with large enough foreground as one event. then maybe output the image with most foreground size.
-  * consider image segmentation to better compute bounding boxes
+  * consider image segmentation (connected components) to better compute bounding boxes
+  * collect a dataset for parameter tuning

@@ -13,12 +13,12 @@ camera.framerate = 2
 rawCapture = PiRGBArray(camera, size=(640, 480))
 
 FOREGROUND_INTENSITY = 255
-MIN_FOREGROUND_PIXEL_NUM = 50
+MIN_FOREGROUND_PIXEL_NUM = 1000
 LEARNING_RATE = -1
-HISTORY=100
+HISTORY=1000
 
 # kernel to filter noise
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(9,9))
 
 # allow the camera to warmup
 time.sleep(0.1)
@@ -27,7 +27,7 @@ time.sleep(0.1)
 fgbg = cv2.BackgroundSubtractorMOG(history=HISTORY, nmixtures=5, backgroundRatio=0.7)
 
 # warm up background subtractor
-WARMUP_FRAMES = 20
+WARMUP_FRAMES = 400
 frame_cnt = 0
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	# grab the raw NumPy array representing the image, then initialize the timestamp
@@ -54,7 +54,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
   # cv2.imshow("Frame", image)
   fgmask = fgbg.apply(image, learningRate=LEARNING_RATE)
   
-  cv2.imshow("Foreground", fgmask)
+  # cv2.imshow("Foreground", fgmask)
   # print 'shape:', fgmask.shape
   # background will be masked by 0 (black), foreground is 255 (white)
   # print 'values:', fgmask[0][0:10] 
@@ -67,7 +67,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # event time in milliseconds
     event_time = int(time.time()*1000)
     logging.warn('event detected at timestamp (in ms) %d', event_time)
-    cv2.imwrite('cv_images/' + str(event_time) + ".jpg", image)
+    image_name = 'cv_images/' + str(event_time)
+    cv2.imwrite(image_name + ".jpg", image)
+    cv2.imwrite(image_name + '_foreground.jpg', filtered)
 
   
   # contours, hierarchy = cv2.findContours(filtered, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -80,7 +82,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
   #    x,y,w,h = cv2.boundingRect(count)
   #    cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
       
-  cv2.imshow("Frame", image)
+  # cv2.imshow("Frame", image)
   
   key = cv2.waitKey(1) & 0xFF
   
