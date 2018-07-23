@@ -1,16 +1,14 @@
 #!/usr/bin/python
 
 import argparse
+import utils.rpi_logging as rpi_logging
 import logging
 import usb_capturer
 import object_detector
 import simple_reporter
 
-LOGGING_FORMAT = '%(asctime)s,%(msecs)d %(levelname)-5s ' \
-'[%(filename)s:%(lineno)d] %(message)s'
-DATE_FORMAT = '%d-%m-%Y:%H:%M:%S'
-
 DEFAULT_CAPTURED_IMAGE_PATH = 'test_data/captured_image.jpg'
+
 
 def main():
   # command line flags
@@ -23,12 +21,9 @@ def main():
   # 07-07-2018:19:27:18,701 ERROR [run_security_monitor.py:13] error_msg
   # Note that tensorflow logging messages have their own format.
   if args.log_to_file:
-    logging.basicConfig(filename=args.log_to_file, \
-    format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
-    level=logging.DEBUG)
+    rpi_logging.config_logging_to_file(args.log_to_file, logging.DEBUG)
   else:
-    logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
-    level=logging.DEBUG)
+    rpi_logging.config_logging(logging.DEBUG)
   
   # initialization
   capturer = usb_capturer.UsbCapturer()
@@ -43,6 +38,7 @@ def main():
     except:
       logging.exception('Exception happens. Exit the main loop')
       break
+
 
 if __name__ == "__main__":
   main()

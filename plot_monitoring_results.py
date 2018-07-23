@@ -1,6 +1,7 @@
 import csv
 import datetime
 import logging
+import utils.rpi_logging as rpi_logging
 import matplotlib.pyplot as plt
 import monitor_performance
 import numpy as np
@@ -8,9 +9,6 @@ import os
 import re
 import utils.datetime_utils
 
-LOGGING_FORMAT = '%(asctime)s,%(msecs)d %(levelname)-5s ' \
-'[%(filename)s:%(lineno)d] %(message)s'
-DATE_FORMAT = '%d-%m-%Y:%H:%M:%S'
 
 MOTION_DATETIME_FORMAT = '%Y%m%d%H%M%S'
 
@@ -147,8 +145,8 @@ def plot_measurements(perf_data, events, file_name):
 
 
 if __name__=='__main__':
-  logging.basicConfig(format=LOGGING_FORMAT, datefmt=DATE_FORMAT, \
-    level=logging.DEBUG)
+
+  rpi_logging.config_logging(logging.DEBUG)
   
   # load measurements data for motion
   # perf_data = read_perf_data('test_data/perf-2018-07-15-00-44-19.csv')
@@ -156,9 +154,10 @@ if __name__=='__main__':
   # file_name = 'figs/perf-2018-07-15.jpg'
   
   # load measurements data for opencv
-  events = get_opencv_event_times('/home/pi/Documents/cv_images')
-  perf_data = read_perf_data('test_data/perf-2018-07-21-22-39-09.csv')
-  perf_data.extend(read_perf_data('test_data/perf-2018-07-22-12-14-06.csv'))
-  file_name = 'figs/opencv-perf-2018-07-22.jpg'
+  # events = get_opencv_event_times('/home/pi/Documents/cv_images')
+  # perf_data = read_perf_data('test_data/perf-2018-07-21-22-39-09.csv')
+  # perf_data.extend(read_perf_data('test_data/perf-2018-07-22-12-14-06.csv'))
+  # file_name = 'figs/opencv-perf-2018-07-22.jpg'
+  
   plot_measurements(perf_data, events, file_name)
   
