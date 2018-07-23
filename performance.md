@@ -18,3 +18,11 @@ OpenCV consumes more memory and CPU compared to motion.
 The drop between 11am and 12pm is because OpenCV was shutdown.
 
 The increase in CPU usage after 1pm is because more demanding OpenCV functions are used, while memory usage us stable.
+
+<img src="figs/1532285772256_foreground.jpg" alt="Smaller kernel" width="600px"/>
+
+The above figure shows the detected foreground after the open operation by a 3x3 Ellipse kernel. The dots are because the camera is behind a screen window.
+
+<img src="figs/1532287068831_foreground.jpg" alt="Larger kernel" width="600px"/>
+
+The above figure shows the detected foreground after the open operation by a 9x9 Ellipse kernel. There is indeed a person before the camera.
